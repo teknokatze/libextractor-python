@@ -1,5 +1,2 @@
 #!/bin/sh
 autoreconf -f -i
-cd libltdl
-autoreconf -f -i
-cd ..

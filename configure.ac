@@ -20,7 +20,7 @@ fi
 
 # test for libextractor
 extractor=0
-AC_MSG_CHECKING(for libextractor)
+AC_MSG_CHECKING([for libextractor])
 AC_ARG_WITH(extractor,
    [  --with-extractor=PFX    Base of libextractor installation],
    [AC_MSG_RESULT([$with_extractor])
@@ -33,8 +33,8 @@ AC_ARG_WITH(extractor,
             extractor=1))
         ;;
       *)
-        LDFLAGS="-L$with_extractor/lib $LDFLAGS"
-        CPPFLAGS="-I$with_extractor/include $CPPFLAGS"
+        LIBDIR="-L$with_extractor/lib $LDFLAGS"
+        INCLUDEDIR="$with_extractor/include $CPPFLAGS"
         AC_CHECK_HEADERS(extractor.h,
           AC_CHECK_LIB([extractor], [EXTRACTOR_loadDefaultLibraries],
             EXT_LIB_PATH="-L$with_extractor/lib $EXT_LIB_PATH"
@@ -51,6 +51,9 @@ then
  AC_MSG_ERROR([libextractor-python requires libextractor])
 fi
 
+AC_SUBST(INCLUDEDIR)
+AC_SUBST(LDFLAGS)
+AC_SUBST(LIBDIR)
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

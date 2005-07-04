@@ -297,16 +297,19 @@ static PyTypeObject ModuleListType = {
 
 /* Module type. */
 
-static EXTRACTOR_KeywordList *Module_extractMethod(const char *filename,
-						   char *data, size_t filesize,
-						   EXTRACTOR_KeywordList *next,
-						   const char *options)
-{
+static EXTRACTOR_KeywordList *
+Module_extractMethod(const char *filename,
+		     char *data, 
+		     size_t filesize,
+		     EXTRACTOR_KeywordList * next,
+		     const char *options) {
   Module *self = NULL;
 
   self = (Module*)atoi(options); /* convert back from string repr of self. */
-
-  printf("In the extractor with object %i.",(int)self);
+#if 0
+  printf("In the extractor with object %p.",
+         self);
+#endif
   return next;
 }
 
@@ -337,8 +340,8 @@ static PyObject *Module_new(PyTypeObject *type, PyObject *args,
   self->module->libraryHandle = NULL;
   self->module->extractMethod = (ExtractMethod)&Module_extractMethod;
   self->module->libname = strdup(name);
-  self->module->options = malloc(12); /* store self as string in options. */
-  sprintf(self->module->options,"%i",(int)self);
+  self->module->options = malloc(24); /* store self as string in options. */
+  snprintf(self->module->options, 24, "%p", self);
   self->module->next = NULL;
 
   goto finish;
@@ -439,7 +442,10 @@ static int Module_traverse(Module *self, visitproc visit, void *arg)
 
 static int Module_clear(Module *self)
 {
-  printf("Removing module in clear: %s.\n",self->module->libname);
+#if 0
+  printf("Removing module in clear: %s.\n",
+         self->module->libname);
+#endif
 #ifdef Py_CLEAR
   Py_CLEAR(self->mlist);
 #endif
@@ -449,7 +455,10 @@ static int Module_clear(Module *self)
 static void Module_dealloc(Module *self)
 {
   Module_clear(self);
-  printf("Removing module: %s.\n",self->module->libname);
+#if 0
+  printf("Removing module: %s.\n",
+         self->module->libname);
+#endif
   self->module->next = NULL;
   EXTRACTOR_removeAll(self->module);
   self->ob_type->tp_free((PyObject*)self);
