@@ -37,7 +37,7 @@ AC_ARG_WITH(extractor,
         CPPFLAGS="-I$with_extractor/include $CPPFLAGS"
         AC_CHECK_HEADERS(extractor.h,
           AC_CHECK_LIB([extractor], [EXTRACTOR_loadDefaultLibraries],
-            EXT_LIB_PATH="-L$with_extractor/lib $EXT_LIB_PATH"
+            EXT_LIB_PATH="$with_extractor"
             extractor=1))
         ;;
     esac
@@ -51,9 +51,7 @@ then
  AC_MSG_ERROR([libextractor-python requires libextractor])
 fi
 
-AC_SUBST(INCLUDEDIR)
-AC_SUBST(LDFLAGS)
-AC_SUBST(LIBDIR)
+AC_SUBST(EXT_LIB_PATH)
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

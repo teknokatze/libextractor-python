@@ -1,13 +1,13 @@
 from distutils.core import Extension, setup
 import sys
 
-path=sys.argv[0]
+path=sys.argv[1]
 sys.argv = sys.argv[1:]
-  
+
 cmod = Extension("extractor",["libextractor_python.c"],
                  libraries=["extractor"],
-                 include_dirs=["."],
-                 library_dirs=[path])
+                 include_dirs=[path + "/include"],
+                 library_dirs=[path + "/lib"])
 
 setup(name="Extractor",
       version="0.5.1",
