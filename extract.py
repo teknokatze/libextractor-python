@@ -21,10 +21,10 @@
 Little demo how to use the libextractor Python binding.
 
 """
-import Extractor
+import extractor
 import sys
 
-xtract = Extractor.Extractor()
+xtract = extractor.Extractor()
 for arg in sys.argv[1:]:
     print "Keywords from " + arg
     keys = xtract.extract(arg);

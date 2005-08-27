@@ -10,7 +10,7 @@ cmod = Extension("extractor",["libextractor_python.c"],
                  library_dirs=[path + "/lib"])
 
 setup(name="Extractor",
-      version="0.5.1",
+      version="0.5.4",
       ext_modules=[cmod],
       author="Christian Grothoff, Heiko Wundram",
       author_email="libextractor@gnu.org")

@@ -6,5 +6,4 @@ EXTRA_DIST = \
   extract.py \
   libextractor_python_setup.py \
   libextractor_python.c \
-  Extractor.py \
   README.debian
