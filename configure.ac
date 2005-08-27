@@ -1,8 +1,8 @@
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.57)
-AC_INIT([libextractor-python], [0.5.1], [bug-libextractor@gnu.org])
+AC_INIT([libextractor-python], [0.5.4], [bug-libextractor@gnu.org])
 AC_REVISION($Revision: 1.67 $)
-AM_INIT_AUTOMAKE([libextractor-python], [0.5.1])
+AM_INIT_AUTOMAKE([libextractor-python], [0.5.4])
 
 AC_PROG_AWK
 AC_PROG_CC
@@ -33,8 +33,8 @@ AC_ARG_WITH(extractor,
             extractor=1))
         ;;
       *)
-        LIBDIR="-L$with_extractor/lib $LDFLAGS"
-        INCLUDEDIR="$with_extractor/include $CPPFLAGS"
+        LDFLAGS="-L$with_extractor/lib $LDFLAGS"
+        CPPFLAGS="-I$with_extractor/include $CPPFLAGS"
         AC_CHECK_HEADERS(extractor.h,
           AC_CHECK_LIB([extractor], [EXTRACTOR_loadDefaultLibraries],
             EXT_LIB_PATH="-L$with_extractor/lib $EXT_LIB_PATH"
