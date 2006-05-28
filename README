@@ -1,1 +1,11 @@
 This is the python binding for libextractor.
+
+Actually, there are two bindings in this package.
+One written by Heiko Wundram (abandoned) and
+another one drafted by Bader Lejmi (extractor.py).
+
+Also note that there is a third binding for both
+libextractor and doodle by nokos, available at
+http://gnunet.org/libextractor/download/
+
+I have no idea which is best at this time.
