@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """extract.py
 
      This file is part of libextractor.
@@ -26,7 +27,7 @@ import sys
 
 xtract = extractor.Extractor()
 for arg in sys.argv[1:]:
-    print "Keywords from " + arg
-    keys = xtract.extract(arg);
-    for i in keys:
-        print i
+    print "Keywords from %s:" % arg
+    keys = xtract.extract(arg)
+    for keyword_type, keyword in keys:
+        print "%s - %s" % (keyword_type.encode('iso-8859-1'), keyword.encode('iso-8859-1'))
