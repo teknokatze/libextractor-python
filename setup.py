@@ -6,7 +6,7 @@ except ImportError:
 
 setup(
     name = "Extractor",
-    version = "0.5",
+    version = "0.6",
 
     py_modules = ['extractor'],
     scripts = ['extract.py'],
@@ -20,9 +20,6 @@ setup(
     license = "GNU GPL",
     keywords = "libextractor binding tag metadata",
     url = "http://gnunet.org/libextractor/",  
-
-    dependency_links=['http://starship.python.net/crew/theller/ctypes/',],
-
     long_description="""libextractor is a simple library for keyword extraction.  libextractor
 does not support all formats but supports a simple plugging mechanism
 such that you can quickly add extractors for additional formats, even

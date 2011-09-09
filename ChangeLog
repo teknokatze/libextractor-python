@@ -1,8 +1,9 @@
+Fri Sep  9 21:09:47 CEST 2011
+	Updated Python binding to GNU libextractor 0.6-API. -CG
+
 Sun May	28 00:42:00 CEST 2006
 	Rewritten using ctypes.
-	
+
 Mon Jul  4 17:19:33 CEST 2005
 	Moved python binding into separate package.
 
-	
-	

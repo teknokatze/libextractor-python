@@ -24,10 +24,22 @@ Little demo how to use the libextractor Python binding.
 """
 import extractor
 import sys
+from ctypes import *
+import struct
 
 xtract = extractor.Extractor()
+
+def print_k(xt, plugin, type, format, mime, data, datalen):
+    mstr = cast (data, c_char_p)
+# FIXME: this ignores 'datalen', not that great...
+# (in general, depending on the mime type and format, only
+# the first 'datalen' bytes in 'data' should be used).
+    if (format == extractor.EXTRACTOR_METAFORMAT_UTF8):
+        print "%s - %s" % (xtract.keywordTypes()[type],  mstr.value)
+    return 0
+
+
 for arg in sys.argv[1:]:
     print "Keywords from %s:" % arg
-    keys = xtract.extract(arg)
-    for keyword_type, keyword in keys:
-        print "%s - %s" % (keyword_type.encode('iso-8859-1'), keyword.encode('iso-8859-1'))
+    xtract.extract(print_k, None, arg)
+
