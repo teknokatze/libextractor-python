@@ -17,9 +17,9 @@ setup(
     author = "Bader Ladjemi, Christian Grothoff",
     author_email = "libextractor@gnu.org",
     description = "Python bindings for GNU libextractor",
-    license = "GNU GPL",
+    license = "GNU GPLv3+",
     keywords = "libextractor binding tag metadata",
-    url = "http://gnunet.org/libextractor/",  
+    url = "http://www.gnu.org/s/libextractor/",  
     long_description="""libextractor is a simple library for keyword extraction.  libextractor
 does not support all formats but supports a simple plugging mechanism
 such that you can quickly add extractors for additional formats, even
