@@ -3,6 +3,7 @@
 
      This file is part of libextractor.
      (C) 2002, 2003, 2004, 2005 Vidyut Samanta and Christian Grothoff
+     (C) 2017 ng0 <ng0@n0.is>
 
      libextractor is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published
@@ -22,6 +23,7 @@
 Little demo how to use the libextractor Python binding.
 
 """
+from __future__ import print_function
 import extractor
 import sys
 from ctypes import *
@@ -35,11 +37,11 @@ def print_k(xt, plugin, type, format, mime, data, datalen):
 # (in general, depending on the mime type and format, only
 # the first 'datalen' bytes in 'data' should be used).
     if (format == extractor.EXTRACTOR_METAFORMAT_UTF8):
-        print "%s - %s" % (xtract.keywordTypes()[type],  mstr.value)
+        print("%s - %s" % (xtract.keywordTypes()[type],  mstr.value))
     return 0
 
 
 for arg in sys.argv[1:]:
-    print "Keywords from %s:" % arg
+    print("Keywords from %s:" % arg)
     xtract.extract(print_k, None, arg)
 
