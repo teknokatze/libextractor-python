@@ -8,8 +8,8 @@ setup(
     name = "Extractor",
     version = "0.6",
 
-    py_modules = ['extractor'],
-    scripts = ['extract.py'],
+    packages = ['libextractor'],
+    scripts = ['examples/extract.py'],
 
     #install_requires = ['ctypes >= 0.9'],
 

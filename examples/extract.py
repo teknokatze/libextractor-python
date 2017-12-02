@@ -24,7 +24,7 @@ Little demo how to use the libextractor Python binding.
 
 """
 from __future__ import print_function
-import extractor
+from libextractor import extractor
 import sys
 from ctypes import *
 import struct
