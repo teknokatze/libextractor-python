@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
-## Python bindings for GNU libextractor
-## 
-## Copyright (C) 2006 Bader Ladjemi <bader@tele2.fr>
-## Copyright (C) 2011 Christian Grothoff <christian@grothoff.org>
-##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or
-## (at your option) any later version.
-##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
-##
-## You should have received a copy of the GNU General Public License
-## along with this program; see the file COPYING. If not, write to the
-## Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139,
-## USA.
-##
+# Python bindings for GNU libextractor
+#
+# Copyright (C) 2006 Bader Ladjemi <bader@tele2.fr>
+# Copyright (C) 2011 Christian Grothoff <christian@grothoff.org>
+# Copyright (C) 2017 ng0 <ng0@n0.is>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; see the file COPYING. If not, write to the
+# Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139,
+# USA.
+
 """
 Python bindings for GNU libextractor
 
@@ -27,18 +28,18 @@ does not support all formats but supports a simple plugging mechanism
 such that you can quickly add extractors for additional formats, even
 without recompiling libextractor. libextractor typically ships with a
 dozen helper-libraries that can be used to obtain keywords from common
-file-types.  
+file-types.
 
-libextractor is a part of the GNU project (http://www.gnu.org/).     
+libextractor is a part of the GNU project (http://www.gnu.org/).
 """
 from ctypes import *
-#fake cdll import
+# fake cdll import
 try:
-    #loading shared object file
+    # loading shared object file
     libextractor = cdll.LoadLibrary('libextractor.so.3')
 except OSError:
     libextractor = cdll.extractor
- 
+
 __all__ = ['Extractor']
 __version__ = "0.6"
 __licence__ = "GNU GPL"
@@ -77,40 +78,40 @@ class Extractor(object):
     Use the add and remove libraries methods to change the list of
     libraries that should be used.
     """
-    
-    def __init__(self, defaults=True, libraries=None):
-	"""
-	Initialize Extractor's instance
-	
-	@param libraries: list of strings that contains extractor's name (supported types)
-	@param defaults: load default plugins
 
-	"""
-	self.extractors = None
-	if defaults:
-	    self.extractors = libextractor.EXTRACTOR_plugin_add_defaults(0)
-	if libraries:
-	    self.extractors = libextractor.EXTRACTOR_plugin_add_config (self.extractors, libraries, 0)
+    def __init__(self, defaults=True, libraries=None):
+        """
+        Initialize Extractor's instance
+
+        @param libraries: list of strings that contains extractor's name (supported types)
+        @param defaults: load default plugins
+        """
+        self.extractors = None
+        if defaults:
+            self.extractors = libextractor.EXTRACTOR_plugin_add_defaults(0)
+        if libraries:
+            self.extractors = libextractor.EXTRACTOR_plugin_add_config (self.extractors, libraries, 0)
     
     def extract(self, proc, proc_cls, filename=None, data=None, size=0):
-	"""Extract keywords from a file, or from its data.
+        """
+        Extract keywords from a file, or from its data.
 
-	@param filename: filename string
-	@param data: data contents
-	@param size: data size
+        @param filename: filename string
+        @param data: data contents
+        @param size: data size
         @param proc: function to call on each value
         @param proc_cls: closure to proc
 	
-	If you give data, size has to be given as well.
+        If you give data, size has to be given as well.
 
         """
-	if not filename and not (data and size):
-	    return None
-	else:
-	    libextractor.EXTRACTOR_extract (self.extractors, filename, data, size, EXTRACT_CB(proc), proc_cls)
-	
+        if not filename and not (data and size):
+            return None
+        else:
+            libextractor.EXTRACTOR_extract (self.extractors, filename, data, size, EXTRACT_CB(proc), proc_cls)
+
     def addLibrary(self, library):
-	"""
+        """
         Add given library to the extractor. Invoke with a string with the name
         of the library that should be added.  For example,
         
@@ -122,12 +123,12 @@ class Extractor(object):
         No errors are reported if the library is not
         found.
 
-	@param library: library's name
+        @param library: library's name
         """	
-	self.extractors = libextractor.EXTRACTOR_plugin_add (self.extractors, library, NULL, 0)
+        self.extractors = libextractor.EXTRACTOR_plugin_add (self.extractors, library, NULL, 0)
 
     def removeLibrary(self, library):
-	"""      
+        """      
         Remove a library.  Pass the name of the library that is to
         be removed.  Only one library can be removed at a time.
         For example,
@@ -135,58 +136,55 @@ class Extractor(object):
         'libextractor_pdf'
 
         removes the PDF extractor (if added).
-	ValueError will be thrown if no library match.
+        ValueError will be thrown if no library match.
 
-	@param library: library's name
-	"""
+        @param library: library's name
+        """
 
-	self.extractors = libextractor.EXTRACTOR_plugin_remove(self.extractors, library)
+        self.extractors = libextractor.EXTRACTOR_plugin_remove(self.extractors, library)
 
     def addLibraries(self, libraries):
-	"""
-	Add given libraries. 
-	Same as addLibary but libraries is a list of library's names.
+        """
+        Add given libraries. 
+        Same as addLibary but libraries is a list of library's names.
 
-	@param libraries: list of libraries names
-	"""
+        @param libraries: list of libraries names
+        """
 
-	self.extractors = libextractor.EXTRACTOR_plugin_add_config(self.extractors, libraries)
+        self.extractors = libextractor.EXTRACTOR_plugin_add_config(self.extractors, libraries)
 
     def removeAllLibraries(self):
-	"""
-	Remove all libraries.
-
-	"""
+        """
+        Remove all libraries.
+        """
 
         libextractor.EXTRACTOR_plugin_remove_all(self.extractors)
         self.extractors = None
 	
     def keywordTypes(self):
-	"""
-	Returns the list of all keywords types.
-	@return: list of all keywords types
+        """
+        Returns the list of all keywords types.
+        @return: list of all keywords types
+        """
+        i = 0
+        keyword_types = []
 
-	"""
-	i = 0
-	keyword_types = []
-	
-	while True:
-	    keyword_type = libextractor.EXTRACTOR_metatype_to_string(i)
-	    if not keyword_type:
-		break
-	    keyword_types.append(keyword_type)
-	    i += 1
-	    
-	return tuple(keyword_types)
-    
+        while True:
+            keyword_type = libextractor.EXTRACTOR_metatype_to_string(i)
+            if not keyword_type:
+                break
+            keyword_types.append(keyword_type)
+            i += 1
+
+        return tuple(keyword_types)
 
     def __del__(self):
-	"""
-	>>> extractor = Extractor()
-	>>> del extractor
-	"""
-	if self.extractors:
-	    self.removeAllLibraries()
+        """
+        >>> extractor = Extractor()
+        >>> del extractor
+        """
+        if self.extractors:
+            self.removeAllLibraries()
 
 if __name__ == "__main__":
     import doctest
