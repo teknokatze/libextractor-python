@@ -41,7 +41,7 @@ except OSError:
     libextractor = cdll.extractor
 
 __all__ = ['Extractor']
-__version__ = "0.6"
+__version__ = "0.6.2"
 __licence__ = "GNU GPL"
 
 """
@@ -90,8 +90,8 @@ class Extractor(object):
         if defaults:
             self.extractors = libextractor.EXTRACTOR_plugin_add_defaults(0)
         if libraries:
-            self.extractors = libextractor.EXTRACTOR_plugin_add_config (self.extractors, libraries, 0)
-    
+            self.extractors = libextractor.EXTRACTOR_plugin_add_config(self.extractors, libraries, 0)
+
     def extract(self, proc, proc_cls, filename=None, data=None, size=0):
         """
         Extract keywords from a file, or from its data.
@@ -101,20 +101,20 @@ class Extractor(object):
         @param size: data size
         @param proc: function to call on each value
         @param proc_cls: closure to proc
-	
+
         If you give data, size has to be given as well.
 
         """
         if not filename and not (data and size):
             return None
         else:
-            libextractor.EXTRACTOR_extract (self.extractors, filename, data, size, EXTRACT_CB(proc), proc_cls)
+            libextractor.EXTRACTOR_extract(self.extractors, filename, data, size, EXTRACT_CB(proc), proc_cls)
 
     def addLibrary(self, library):
         """
         Add given library to the extractor. Invoke with a string with the name
         of the library that should be added.  For example,
-        
+
         'libextractor_filename'
 
         will prepend the extractor that just adds the filename as a
@@ -124,11 +124,11 @@ class Extractor(object):
         found.
 
         @param library: library's name
-        """	
-        self.extractors = libextractor.EXTRACTOR_plugin_add (self.extractors, library, NULL, 0)
+        """
+        self.extractors = libextractor.EXTRACTOR_plugin_add(self.extractors, library, NULL, 0)
 
     def removeLibrary(self, library):
-        """      
+        """
         Remove a library.  Pass the name of the library that is to
         be removed.  Only one library can be removed at a time.
         For example,
@@ -145,7 +145,7 @@ class Extractor(object):
 
     def addLibraries(self, libraries):
         """
-        Add given libraries. 
+        Add given libraries.
         Same as addLibary but libraries is a list of library's names.
 
         @param libraries: list of libraries names
@@ -160,7 +160,7 @@ class Extractor(object):
 
         libextractor.EXTRACTOR_plugin_remove_all(self.extractors)
         self.extractors = None
-	
+
     def keywordTypes(self):
         """
         Returns the list of all keywords types.
@@ -185,6 +185,7 @@ class Extractor(object):
         """
         if self.extractors:
             self.removeAllLibraries()
+
 
 if __name__ == "__main__":
     import doctest
