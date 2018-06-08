@@ -11,7 +11,7 @@ setup(
     packages = ['libextractor'],
     scripts = ['examples/extract.py'],
 
-    #install_requires = ['ctypes >= 0.9'],
+    # install_requires = ['ctypes >= 0.9'],
 
     # metadata for upload to PyPI
     author = "Bader Ladjemi, Christian Grothoff, Nils Gillmann (ng0)",
