@@ -3,7 +3,7 @@
 #
 # Copyright (C) 2006 Bader Ladjemi <bader@tele2.fr>
 # Copyright (C) 2011 Christian Grothoff <christian@grothoff.org>
-# Copyright (C) 2017 Nils Gillmann <ng0@n0.is>
+# Copyright (C) 2017, 2018 Nils Gillmann <ng0@n0.is>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ except OSError:
     libextractor = cdll.extractor
 
 __all__ = ['Extractor']
-__version__ = "0.6.2"
+__version__ = "0.7"
 __licence__ = "GNU GPL"
 
 """
