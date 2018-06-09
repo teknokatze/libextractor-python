@@ -41,7 +41,7 @@ except OSError:
     libextractor = cdll.extractor
 
 __all__ = ['Extractor']
-__version__ = "0.7"
+__version__ = "1.7"
 __licence__ = "GNU GPL"
 
 """
