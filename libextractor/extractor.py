@@ -33,10 +33,12 @@ file-types.
 libextractor is a part of the GNU project (http://www.gnu.org/).
 """
 from ctypes import *
+from ctypes.util import find_library
+
 # fake cdll import
 try:
     # loading shared object file
-    libextractor = cdll.LoadLibrary('libextractor.so.3')
+    libextractor = cdll.LoadLibrary(find_library('libextractor.so.3'))
 except OSError:
     libextractor = cdll.extractor
 
