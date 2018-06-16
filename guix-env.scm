@@ -30,6 +30,7 @@
  (gnu packages base)
  (gnu packages version-control)
  (gnu packages ssh)
+ (gnu packages linux)
  ((guix licenses) #:prefix license:))
 
 (define %source-dir (current-source-directory))
@@ -72,5 +73,6 @@
   (propagated-inputs
    `(("python" ,python-2)
      ("openssh" ,openssh)
+     ("strace" ,strace)
      ("git" ,git)
      ,@(package-propagated-inputs python2-libextractor))))
