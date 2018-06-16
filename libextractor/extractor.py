@@ -33,14 +33,25 @@ file-types.
 libextractor is a part of the GNU project (http://www.gnu.org/).
 """
 from ctypes import *
+from ctypes import CDLL
 from ctypes.util import find_library
+import os
+
+# Can be useful:
+# "DYLD_LIBRARY_PATH" in os.environ
 
 # fake cdll import
+# loading shared object file
 try:
-    # loading shared object file
-    libextractor = cdll.LoadLibrary(find_library('libextractor.so.3'))
-except OSError:
-    libextractor = cdll.extractor
+    if os.uname()[0] == 'Linux':
+        libextractor = CDLL('libextractor.so.3')
+    elif os.uname()[0] == 'Linux':
+        libextractor = cdll.LoadLibrary(find_library('libextractor.so.3'))
+    else:
+        libextractor = cdll.extractor
+except:
+    raise ImportError("Could not find shared 'libextractor' library.")
+
 
 __all__ = ['Extractor']
 __version__ = "1.7"
