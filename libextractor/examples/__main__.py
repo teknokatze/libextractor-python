@@ -38,7 +38,7 @@ xtract = extractor.Extractor()
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-formatter = logging.Formater('%(asctime)s %(levelname)s - %(message)s')
+formatter = logging.Formatter('%(asctime)s %(levelname)s - %(message)s')
 
 fh = logging.FileHandler('log.txt')
 fh.setLevel(logging.DEBUG)
