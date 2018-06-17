@@ -4,7 +4,7 @@ guix-environment:
 	guix environment -l guix-env.scm --pure
 
 run:
-	./arrr python2 examples/extract.py README
+	./arrr python2 libextractor/examples/__main__.py README
 
 clean:
 	rm -rf */*.pyc */*~ *~
