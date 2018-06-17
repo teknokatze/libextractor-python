@@ -35,19 +35,35 @@ faulthandler.enable()
 
 xtract = extractor.Extractor()
 
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+formatter = logging.Formater('%(asctime)s %(levelname)s - %(message)s')
+
+fh = logging.FileHandler('log.txt')
+fh.setLevel(logging.DEBUG)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
+
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+ch.setFormatter(formatter)
+logger.addHandler(ch)
+
 def print_k(xt, plugin, type, format, mime, data, datalen):
     mstr = cast(data, c_char_p)
     # FIXME: this ignores 'datalen', not that great...
     # (in general, depending on the mime type and format, only
     # the first 'datalen' bytes in 'data' should be used).
     if (format == extractor.EXTRACTOR_METAFORMAT_UTF8):
-        print("%s - %s" % (xtract.keywordTypes()[type], mstr.value))
+        # print("%s - %s" % (xtract.keywordTypes()[type], mstr.value))
+        logger.debug("%s - %s" % (xtract.keywordTypes()[type], mstr.value))
     return 0
 
 def main():
     # stuff
     for arg in sys.argv[1:]:
-        print("Keywords from %s:" % arg)
+        logger.debug("Keywords from %s:" % arg)
         xtract.extract(print_k, None, arg)
 
 if __name__ == "__main__":
