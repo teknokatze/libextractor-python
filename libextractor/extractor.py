@@ -36,6 +36,10 @@ from ctypes import *
 from ctypes import CDLL
 from ctypes.util import find_library
 import os
+import logging
+import faulthandler
+
+faulthandler.enable()
 
 # Can be useful:
 # "DYLD_LIBRARY_PATH" in os.environ

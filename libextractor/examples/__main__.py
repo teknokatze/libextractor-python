@@ -28,7 +28,10 @@ from libextractor import extractor
 import sys
 from ctypes import *
 import struct
+import logging
+import faulthandler
 
+faulthandler.enable()
 
 xtract = extractor.Extractor()
 
