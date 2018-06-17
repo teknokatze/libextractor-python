@@ -15,10 +15,10 @@ About libextractor
 Dependencies
 ============
  
- * python >= 2.3
+ * python >= 2.7
     web site: http://www.python.org/
 
- * libextractor >= 0.6
+ * libextractor >= 1.6
     web site: http://www.gnu.org/software/libextractor/
 
  * ctypes >= 0.9 
@@ -63,6 +63,7 @@ Copyright
  
  Copyright (C) 2006 Bader Ladjemi <bader@tele2.fr>
  Copyright (C) 2011 Christian Grothoff <christian@grothoff.org>
+ Copyright (C) 2017, 2018 Nils Gillmann <gillmann@n0.is>
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
