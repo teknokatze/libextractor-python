@@ -56,7 +56,8 @@ def print_k(xt, plugin, type, format, mime, data, datalen):
     # (in general, depending on the mime type and format, only
     # the first 'datalen' bytes in 'data' should be used).
     if (format == extractor.EXTRACTOR_METAFORMAT_UTF8):
-        # print("%s - %s" % (xtract.keywordTypes()[type], mstr.value))
+        print("%s - %s" % (xtract.keywordTypes()[type], mstr.value))
+        # DEBUGGING OUTPUT + LOG:
         logger.debug("%s - %s" % (xtract.keywordTypes()[type], mstr.value))
     return 0
 
