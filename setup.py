@@ -11,6 +11,8 @@ setup(
     packages = ['libextractor'],
     scripts = ['examples/extract.py'],
 
+    entry_points = { "console_scripts": [ "extract.py = libextractor.examples.__main__:main", ] },
+
     # install_requires = ['ctypes >= 0.9'],
 
     # metadata for upload to PyPI
@@ -40,5 +42,4 @@ libextractor is a part of the GNU project (https://www.gnu.org/).""",
                  'Topic :: Text Processing :: Filters'],
 
     platforms=['windows', 'Linux', 'MacOS X', 'Solaris', 'FreeBSD'],
-
 )
