@@ -62,10 +62,13 @@ def print_k(xt, plugin, type, format, mime, data, datalen):
     return 0
 
 def main():
-    # stuff
-    for arg in sys.argv[1:]:
-        logger.debug("Keywords from %s:" % arg)
-        xtract.extract(print_k, None, arg)
+    try:
+        # stuff
+        for arg in sys.argv[1:]:
+            logger.debug("Keywords from %s:" % arg)
+            xtract.extract(print_k, None, arg)
+    except Exception as e:
+        logger.debug(e)
 
 if __name__ == "__main__":
     main()
