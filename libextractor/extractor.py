@@ -205,5 +205,8 @@ class Extractor(object):
 
 
 if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
+    try:
+        import doctest
+        doctest.testmod()
+    except Exception as e:
+        print(e)
