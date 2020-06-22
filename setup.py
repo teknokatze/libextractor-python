@@ -11,7 +11,7 @@ setup(
     packages = find_packages(),
     entry_points = { "console_scripts": [ "extract.py = libextractor.examples.__main__:main", ] },
 
-    author = "Bader Ladjemi, Christian Grothoff, Nils Gillmann (ng0)",
+    author = "Bader Ladjemi, Christian Grothoff, Nikita Gillmann",
     author_email = "libextractor@gnu.org",
     description = "Python bindings for GNU libextractor",
     license = "GNU GPLv3+",
